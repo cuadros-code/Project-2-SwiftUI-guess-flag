@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B5258172CA7094A00809C39 /* project2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B5258162CA7094A00809C39 /* project2.png */; };
+		1B5258192CA7099100809C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B5258182CA7099100809C39 /* README.md */; };
 		1B9E53962CA207C0001F7D72 /* Project_2_SwiftUI_guess_flagApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9E53952CA207C0001F7D72 /* Project_2_SwiftUI_guess_flagApp.swift */; };
 		1B9E53982CA207C0001F7D72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9E53972CA207C0001F7D72 /* ContentView.swift */; };
 		1B9E539A2CA207C1001F7D72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9E53992CA207C1001F7D72 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B5258162CA7094A00809C39 /* project2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = project2.png; sourceTree = "<group>"; };
+		1B5258182CA7099100809C39 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1B9E53922CA207C0001F7D72 /* Project-2-SwiftUI-guess-flag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project-2-SwiftUI-guess-flag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9E53952CA207C0001F7D72 /* Project_2_SwiftUI_guess_flagApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_2_SwiftUI_guess_flagApp.swift; sourceTree = "<group>"; };
 		1B9E53972CA207C0001F7D72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +39,8 @@
 		1B9E53892CA207C0001F7D72 = {
 			isa = PBXGroup;
 			children = (
+				1B5258162CA7094A00809C39 /* project2.png */,
+				1B5258182CA7099100809C39 /* README.md */,
 				1B9E53942CA207C0001F7D72 /* Project-2-SwiftUI-guess-flag */,
 				1B9E53932CA207C0001F7D72 /* Products */,
 			);
@@ -125,7 +131,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B5258172CA7094A00809C39 /* project2.png in Resources */,
 				1B9E539D2CA207C1001F7D72 /* Preview Assets.xcassets in Resources */,
+				1B5258192CA7099100809C39 /* README.md in Resources */,
 				1B9E539A2CA207C1001F7D72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
