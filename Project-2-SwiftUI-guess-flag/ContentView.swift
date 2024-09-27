@@ -27,17 +27,20 @@ struct ContentView: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = 0
-    @State private var radius = 700
+    @State private var errorAlert = false
+    @State private var finalAlert = false
+    @State private var selectedFlag = ""
+    @State private var totalQuestions = 1
     
     var body: some View {
         
         NavigationView{
             ZStack {
                 RadialGradient(
-                    stops: [ .init(color: .gray, location: 0.3), .init(color: .indigo, location: 0.3)],
+                    stops: [ .init(color: .black, location: 0), .init(color: .gray, location: 0)],
                     center: .top,
-                    startRadius: 100,
-                    endRadius: CGFloat(radius)
+                    startRadius: 220,
+                    endRadius: 700
                 )
                 .animation(.bouncy, value: 800)
                     .ignoresSafeArea()
@@ -61,8 +64,6 @@ struct ContentView: View {
                                 .clipShape(.buttonBorder)
                                 .shadow(radius: 5)
                         }
-                        
-                        
                     }
                     Spacer()
                 }
@@ -79,21 +80,36 @@ struct ContentView: View {
             }
         }
         
+        .alert("Wrong! That’s the flag of \(selectedFlag)", isPresented: $errorAlert) {
+            Button("Try Again") {
+                askQuestion()
+            }
+        }
+        
+        .alert("Final Score: \(scoreTitle)", isPresented: $finalAlert) {
+            Button("Reset") {
+                scoreTitle = 0
+                totalQuestions = 0
+                askQuestion()
+            }
+        }
     }
     
     
     func flatTap(_ number: Int) {
+        if totalQuestions == 8 {
+            return finalAlert = true
+        }
+        
         if number == correctAnswers {
             scoreTitle += 1
+            askQuestion()
         } else {
             scoreTitle -= 1
+            errorAlert = true
+            selectedFlag = countries[number]
         }
-        askQuestion()
-        
-        
-        
-        
-        
+        totalQuestions += 1
     }
     
     func askQuestion() {
