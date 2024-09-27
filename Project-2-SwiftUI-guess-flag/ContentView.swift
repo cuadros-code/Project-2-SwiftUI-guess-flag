@@ -9,13 +9,98 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var alert = false
+    @State private var countries = [
+        "Estonia",
+        "France",
+        "Germany",
+        "Ireland",
+        "Italy",
+        "Nigeria",
+        "Poland",
+        "Spain",
+        "UK",
+        "Ukraine",
+        "US"
+    ].shuffled()
+    
+    @State private var correctAnswers = Int.random(in: 0...2)
+    
+    @State private var showingScore = false
+    @State private var scoreTitle = 0
+    @State private var radius = 700
     
     var body: some View {
-        Image(systemName: "swift")
-            .font(.largeTitle)
-            .foregroundStyle(.red)
+        
+        NavigationView{
+            ZStack {
+                RadialGradient(
+                    stops: [ .init(color: .gray, location: 0.3), .init(color: .indigo, location: 0.3)],
+                    center: .top,
+                    startRadius: 100,
+                    endRadius: CGFloat(radius)
+                )
+                .animation(.bouncy, value: 800)
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 30) {
+                    VStack{
+                        Text("Tap the flag of")
+                            .foregroundStyle(.white)
+                            .font(.title2)
+                        Text(countries[correctAnswers])
+                            .foregroundStyle(.white)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                    }
+                    
+                    ForEach(0..<3) { number in
+                        Button {
+                            flatTap(number)
+                        } label: {
+                            Image(countries[number])
+                                .clipShape(.buttonBorder)
+                                .shadow(radius: 5)
+                        }
+                        
+                        
+                    }
+                    Spacer()
+                }
+                
+            }
+            
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Score: \(scoreTitle)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                }
+            }
+        }
+        
     }
+    
+    
+    func flatTap(_ number: Int) {
+        if number == correctAnswers {
+            scoreTitle += 1
+        } else {
+            scoreTitle -= 1
+        }
+        askQuestion()
+        
+        
+        
+        
+        
+    }
+    
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswers = Int.random(in: 0...2)
+    }
+    
 }
 
 #Preview {
