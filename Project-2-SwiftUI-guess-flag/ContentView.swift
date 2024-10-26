@@ -32,6 +32,11 @@ struct ContentView: View {
     @State private var selectedFlag = ""
     @State private var totalQuestions = 1
     
+    @State private var degressAnimation = 0.0
+    @State private var buttonTapped = 5
+    @State private var opacityAnimation = 1.0
+    @State private var scaleSize = 1.0
+    
     var body: some View {
         
         NavigationView{
@@ -57,11 +62,26 @@ struct ContentView: View {
                     }
                     
                     ForEach(0..<3) { number in
+                        
                         Button {
+                            buttonTapped = number
                             flatTap(number)
                         } label: {
                             FlagImage(imageName: countries[number])
                         }
+                        .rotation3DEffect(
+                            Angle(
+                                degrees: number == buttonTapped ? degressAnimation : 0
+                            ),
+                            axis: (x: 0, y: 1, z: 0)
+                        )
+                        .opacity(number != buttonTapped ? opacityAnimation : 1)
+                        .animation(
+                            .easeInOut,
+                            value: opacityAnimation
+                        )
+                        .scaleEffect(number != buttonTapped ? scaleSize : 1)
+                        .animation(.easeIn, value: scaleSize)
                     }
                     Spacer()
                 }
@@ -95,6 +115,13 @@ struct ContentView: View {
     
     
     func flatTap(_ number: Int) {
+        
+        withAnimation(.spring(duration: 1, bounce: 0.4)){
+            degressAnimation += 360
+            opacityAnimation *= 0.7
+            scaleSize = 0.0
+        }
+        
         if totalQuestions == 8 {
             return finalAlert = true
         }
@@ -108,11 +135,20 @@ struct ContentView: View {
             selectedFlag = countries[number]
         }
         totalQuestions += 1
+        
+        
     }
+        
     
     func askQuestion() {
-        countries.shuffle()
-        correctAnswers = Int.random(in: 0...2)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            countries.shuffle()
+            correctAnswers = Int.random(in: 0...2)
+            withAnimation {
+                opacityAnimation  = 1
+                scaleSize = 1
+            }
+        }
     }
     
 }
